@@ -1,0 +1,61 @@
+---
+import Icon from "./Icon.astro";
+import { profile } from "../data/profile";
+---
+
+<section id="accueil" class="pt-32 pb-20 sm:pt-40 sm:pb-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="reveal max-w-3xl">
+      <p class="text-sm font-semibold text-[var(--color-primary)] mb-4">{profile.title}</p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--color-text)] leading-[1.1]">
+        {profile.name}
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-[var(--color-text-muted)] leading-relaxed">
+        {profile.tagline}
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a
+          href="#projets"
+          class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--color-primary-hover)] transition-colors"
+        >
+          Voir mes projets
+        </a>
+        <a
+          href="#contact"
+          class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-6 py-3 text-sm font-semibold text-[var(--color-text)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+        >
+          Me contacter
+        </a>
+      </div>
+
+      <div class="mt-10 flex items-center gap-5">
+        <a
+          href={profile.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Profil GitHub"
+          class="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
+        >
+          <Icon name="github" class="w-6 h-6" />
+        </a>
+        <a
+          href={profile.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Profil LinkedIn"
+          class="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
+        >
+          <Icon name="linkedin" class="w-6 h-6" />
+        </a>
+        <a
+          href={`mailto:${profile.email}`}
+          aria-label="Envoyer un email"
+          class="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
+        >
+          <Icon name="mail" class="w-6 h-6" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

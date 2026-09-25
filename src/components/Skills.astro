@@ -1,0 +1,26 @@
+---
+import { skills } from "../data/skills";
+---
+
+<section id="competences" class="py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <h2 class="reveal text-3xl sm:text-4xl font-bold text-[var(--color-text)]">Compétences</h2>
+
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-10">
+      {skills.map((group) => (
+        <div class="reveal">
+          <h3 class="text-sm font-bold uppercase tracking-wide text-[var(--color-text-muted)]">
+            {group.category}
+          </h3>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {group.skills.map((skill) => (
+              <span class="rounded-full bg-[var(--color-primary-soft)] px-3.5 py-1.5 text-sm font-medium text-[var(--color-primary)]">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

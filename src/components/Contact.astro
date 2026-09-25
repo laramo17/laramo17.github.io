@@ -1,0 +1,44 @@
+---
+import Icon from "./Icon.astro";
+import { profile } from "../data/profile";
+
+const links = [
+  { href: `mailto:${profile.email}`, icon: "mail" as const, label: profile.email, external: false },
+  { href: profile.linkedin, icon: "linkedin" as const, label: "LinkedIn", external: true },
+  { href: profile.github, icon: "github" as const, label: "GitHub", external: true },
+];
+---
+
+<section id="contact" class="py-20 sm:py-28 bg-[var(--color-bg-alt)]">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 text-center">
+    <h2 class="reveal text-3xl sm:text-4xl font-bold text-[var(--color-text)]">Contact</h2>
+    <p class="reveal mt-4 text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
+      Une opportunité, une question ? N'hésitez pas à me contacter.
+    </p>
+
+    <div class="reveal mt-10 flex flex-wrap items-center justify-center gap-4">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noopener noreferrer" : undefined}
+          class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] bg-white px-5 py-3 text-sm font-semibold text-[var(--color-text)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+        >
+          <Icon name={link.icon} class="w-4 h-4" />
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="reveal mt-8">
+      <a
+        href={profile.cvUrl}
+        download
+        class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--color-primary-hover)] transition-colors"
+      >
+        <Icon name="download" class="w-4 h-4" />
+        Télécharger mon CV
+      </a>
+    </div>
+  </div>
+</section>

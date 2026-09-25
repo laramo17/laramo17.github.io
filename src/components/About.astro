@@ -1,0 +1,33 @@
+---
+import { experiences } from "../data/experience";
+import { projects } from "../data/projects";
+
+const stats = [
+  { value: `${experiences.length}`, label: "Expériences professionnelles" },
+  { value: `${projects.length}`, label: "Projets réalisés" },
+  { value: "3", label: "Domaines : Dev, Data, IA & ML" },
+];
+---
+
+<section id="a-propos" class="py-20 sm:py-28 bg-[var(--color-bg-alt)]">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="reveal max-w-3xl">
+      <h2 class="text-3xl sm:text-4xl font-bold text-[var(--color-text)]">À propos</h2>
+      <p class="mt-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
+        <!-- TODO: rédige un court paragraphe de présentation personnelle (parcours, motivations, ce que tu recherches). -->
+        Développeur full-stack orienté data et sécurité, avec une expérience couvrant le
+        développement web, le traitement de données et l'intégration de modèles d'intelligence
+        artificielle, acquise à travers plusieurs stages et projets personnels.
+      </p>
+    </div>
+
+    <div class="reveal mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
+      {stats.map((stat) => (
+        <div class="rounded-2xl border border-[var(--color-border)] bg-white p-6 text-center">
+          <div class="text-3xl font-extrabold text-[var(--color-primary)]">{stat.value}</div>
+          <div class="mt-2 text-sm text-[var(--color-text-muted)]">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

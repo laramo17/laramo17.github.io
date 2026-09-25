@@ -1,0 +1,102 @@
+---
+import Icon from "./Icon.astro";
+import { profile } from "../data/profile";
+
+const navLinks = [
+  { href: "#accueil", label: "Accueil" },
+  { href: "#parcours", label: "Parcours" },
+  { href: "#projets", label: "Projets" },
+  { href: "#competences", label: "Compétences" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header class="fixed top-0 inset-x-0 z-50 border-b border-[var(--color-border)] bg-white/80 backdrop-blur-md">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between">
+    <a
+      href="#accueil"
+      class="font-bold text-lg text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors"
+    >
+      {profile.name}
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8" aria-label="Navigation principale">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="hidden md:block">
+      <a
+        href={profile.cvUrl}
+        download
+        class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-primary-hover)] transition-colors"
+      >
+        <Icon name="download" class="w-4 h-4" />
+        Télécharger mon CV
+      </a>
+    </div>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="md:hidden p-2 text-[var(--color-text)]"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <Icon name="menu" class="w-6 h-6" />
+    </button>
+  </div>
+
+  <nav
+    id="mobile-menu"
+    class="md:hidden hidden flex-col gap-1 border-t border-[var(--color-border)] bg-white px-4 py-3"
+    aria-label="Navigation mobile"
+  >
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="rounded-md px-3 py-2 text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-bg-alt)]"
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href={profile.cvUrl}
+      download
+      class="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-primary-hover)]"
+    >
+      <Icon name="download" class="w-4 h-4" />
+      Télécharger mon CV
+    </a>
+  </nav>
+</header>
+
+<script is:inline>
+  (function () {
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener("click", () => {
+      const isOpen = !menu.classList.contains("hidden");
+      menu.classList.toggle("hidden");
+      menu.classList.toggle("flex");
+      toggle.setAttribute("aria-expanded", String(!isOpen));
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.add("hidden");
+        menu.classList.remove("flex");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  })();
+</script>

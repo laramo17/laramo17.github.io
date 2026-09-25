@@ -1,0 +1,74 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import { projects } from "../data/projects";
+import type { ProjectCategory } from "../data/types";
+
+const sorted = [...projects].sort((a, b) => Number(b.featured) - Number(a.featured));
+
+const filters: { key: ProjectCategory | "all"; label: string }[] = [
+  { key: "all", label: "Tous" },
+  { key: "dev", label: "Dev" },
+  { key: "data", label: "Data" },
+  { key: "ai-ml", label: "AI & ML" },
+];
+
+const counts: Record<string, number> = {
+  all: projects.length,
+  dev: projects.filter((p) => p.category === "dev").length,
+  data: projects.filter((p) => p.category === "data").length,
+  "ai-ml": projects.filter((p) => p.category === "ai-ml").length,
+};
+---
+
+<section id="projets" class="py-20 sm:py-28 bg-[var(--color-bg-alt)]">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <h2 class="reveal text-3xl sm:text-4xl font-bold text-[var(--color-text)]">Projets</h2>
+
+    <div
+      id="project-filters"
+      class="reveal mt-10 flex flex-wrap gap-2"
+      role="tablist"
+      aria-label="Filtrer les projets par catégorie"
+    >
+      {filters.map((f, i) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          data-filter={f.key}
+          class="filter-btn rounded-full border border-[var(--color-border)] px-4 py-2 text-sm font-semibold text-[var(--color-text-muted)] transition-colors aria-selected:bg-[var(--color-primary)] aria-selected:text-white aria-selected:border-[var(--color-primary)] hover:border-[var(--color-primary)]"
+        >
+          {f.label} <span class="opacity-70">({counts[f.key]})</span>
+        </button>
+      ))}
+    </div>
+
+    <div id="project-grid" class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sorted.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const buttons = document.querySelectorAll("#project-filters .filter-btn");
+    const cards = document.querySelectorAll("#project-grid .project-card");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => b.setAttribute("aria-selected", "false"));
+        btn.setAttribute("aria-selected", "true");
+
+        const filter = btn.getAttribute("data-filter");
+        cards.forEach((card) => {
+          const match = filter === "all" || card.getAttribute("data-category") === filter;
+          card.style.transition = "opacity 0.25s ease";
+          card.style.opacity = match ? "1" : "0";
+          card.style.display = match ? "" : "none";
+        });
+      });
+    });
+  })();
+</script>
