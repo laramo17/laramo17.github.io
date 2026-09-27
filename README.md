@@ -1,4 +1,4 @@
-# Portfolio — Omar El Ouardi
+# Portfolio — Omar
 
 Site portfolio personnel, statique, construit avec [Astro](https://astro.build) + TypeScript +
 Tailwind CSS, déployé automatiquement sur GitHub Pages.
@@ -20,20 +20,20 @@ npm run dev       # http://localhost:4321
 ```
 
 | Commande               | Action                                          |
-| ----------------------- | ------------------------------------------------ |
-| `npm run dev`           | Serveur de développement                         |
-| `npm run build`         | Build de production dans `./dist/`               |
-| `npm run preview`       | Prévisualise le build de production               |
-| `npm run sync:github`   | Rafraîchit la liste des dépôts publics GitHub     |
-| `npm run format`        | Formate le code avec Prettier                     |
-| `npm run format:check`  | Vérifie le formatage sans modifier les fichiers   |
+| ---------------------- | ----------------------------------------------- |
+| `npm run dev`          | Serveur de développement                        |
+| `npm run build`        | Build de production dans `./dist/`              |
+| `npm run preview`      | Prévisualise le build de production             |
+| `npm run sync:github`  | Rafraîchit la liste des dépôts publics GitHub   |
+| `npm run format`       | Formate le code avec Prettier                   |
+| `npm run format:check` | Vérifie le formatage sans modifier les fichiers |
 
 ## Structure des données
 
 Tout le contenu du site est séparé du code dans `src/data/`, pour pouvoir le mettre à jour sans
 toucher aux composants :
 
-- `profile.ts` — nom, titre, accroche, contact, lien du CV
+- `profile.ts` — nom, titre, accroche, contact
 - `experience.ts` — expériences professionnelles (timeline)
 - `education.ts` — diplômes et certifications
 - `projects.ts` — projets GitHub (titre, catégorie, technologies, liens)
@@ -88,9 +88,6 @@ Pour l'activer sur GitHub :
 Ces éléments n'étaient pas présents dans l'extrait de CV fourni ou nécessitent une action de ta
 part :
 
-- [ ] `src/data/profile.ts` : accroche (`tagline`), localisation, vérifier l'URL LinkedIn exacte
+- [ ] `src/data/profile.ts` : localisation
 - [ ] `src/data/education.ts` : diplômes et certifications (section absente de l'extrait de CV)
-- [ ] `src/components/About.astro` : paragraphe de présentation personnelle
-- [ ] `public/cv.pdf` : ajouter le fichier CV réel en PDF (le bouton de téléchargement pointe déjà
-      vers `/cv.pdf`)
 - [ ] Vérifier/compléter les catégories et descriptions de projets dans `src/data/projects.ts`

@@ -1,26 +1,78 @@
 ---
+import Icon from "./Icon.astro";
+import SectionTitle from "./SectionTitle.astro";
 import { skills } from "../data/skills";
+
+type IconName = "code" | "database" | "brain" | "wrench";
+
+const styles: Record<
+  string,
+  { icon: IconName; tile: string; chip: string; from: string; to: string }
+> = {
+  Dev: {
+    icon: "code",
+    tile: "bg-blue-50 text-blue-600",
+    chip: "bg-blue-50 text-blue-700 ring-blue-100",
+    from: "#2563eb",
+    to: "#3b82f6",
+  },
+  Data: {
+    icon: "database",
+    tile: "bg-teal-50 text-teal-600",
+    chip: "bg-teal-50 text-teal-700 ring-teal-100",
+    from: "#0d9488",
+    to: "#06b6d4",
+  },
+  "AI & ML": {
+    icon: "brain",
+    tile: "bg-indigo-50 text-indigo-600",
+    chip: "bg-indigo-50 text-indigo-700 ring-indigo-100",
+    from: "#6366f1",
+    to: "#a855f7",
+  },
+  Outils: {
+    icon: "wrench",
+    tile: "bg-slate-100 text-slate-700",
+    chip: "bg-slate-50 text-slate-700 ring-slate-200",
+    from: "#475569",
+    to: "#0f172a",
+  },
+};
+
+const fallback = styles.Outils;
 ---
 
 <section id="competences" class="py-20 sm:py-28">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
-    <h2 class="reveal text-3xl sm:text-4xl font-bold text-[var(--color-text)]">Compétences</h2>
+    <SectionTitle eyebrow="Compétences" title="Ma boîte à outils" />
 
-    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-10">
-      {skills.map((group) => (
-        <div class="reveal">
-          <h3 class="text-sm font-bold uppercase tracking-wide text-[var(--color-text-muted)]">
-            {group.category}
-          </h3>
-          <div class="mt-4 flex flex-wrap gap-2">
-            {group.skills.map((skill) => (
-              <span class="rounded-full bg-[var(--color-primary-soft)] px-3.5 py-1.5 text-sm font-medium text-[var(--color-primary)]">
-                {skill}
+    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+      {skills.map((group) => {
+        const s = styles[group.category] ?? fallback;
+        return (
+          <div
+            class="card-glow reveal rounded-2xl border border-[var(--color-border)] bg-white p-6 shadow-sm"
+            style={`--glow-from: ${s.from}; --glow-to: ${s.to};`}
+          >
+            <div class="flex items-center gap-3">
+              <span class={`grid h-10 w-10 place-items-center rounded-xl ${s.tile}`}>
+                <Icon name={s.icon} class="h-5 w-5" />
               </span>
-            ))}
+              <h3 class="text-lg font-bold text-[var(--color-text)]">{group.category}</h3>
+              <span class="ml-auto font-mono text-xs text-[var(--color-text-muted)]">
+                {group.skills.length}
+              </span>
+            </div>
+            <div class="mt-5 flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <span class={`rounded-lg px-3 py-1.5 text-sm font-medium ring-1 ${s.chip}`}>
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>

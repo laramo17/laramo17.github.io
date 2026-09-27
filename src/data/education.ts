@@ -1,11 +1,5 @@
 import type { Education } from "./types";
 
-// TODO: section absente de l'extrait de CV fourni — complète avec tes diplômes et certifications.
-export const education: Education[] = [
-  {
-    degree: "TODO: intitulé du diplôme",
-    institution: "TODO: établissement",
-    startDate: "TODO",
-    endDate: "TODO",
-  },
-];
+// TODO: ajoute tes diplômes et certifications. Le bloc « Formation » reste masqué tant que la liste est vide.
+// Exemple : { degree: "Master Data Science", institution: "Université X", startDate: "2024", endDate: "2026" }
+export const education: Education[] = [];

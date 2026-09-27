@@ -1,5 +1,6 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
+import SectionTitle from "./SectionTitle.astro";
 import { projects } from "../data/projects";
 import type { ProjectCategory } from "../data/types";
 
@@ -22,11 +23,15 @@ const counts: Record<string, number> = {
 
 <section id="projets" class="py-20 sm:py-28 bg-[var(--color-bg-alt)]">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
-    <h2 class="reveal text-3xl sm:text-4xl font-bold text-[var(--color-text)]">Projets</h2>
+    <SectionTitle
+      eyebrow="Projets"
+      title="Ce que j'ai construit"
+      subtitle="Chaque carte ouvre le dépôt GitHub correspondant."
+    />
 
     <div
       id="project-filters"
-      class="reveal mt-10 flex flex-wrap gap-2"
+      class="reveal mt-10 inline-flex max-w-full flex-wrap gap-1 rounded-2xl border border-[var(--color-border)] bg-white p-1.5 shadow-sm"
       role="tablist"
       aria-label="Filtrer les projets par catégorie"
     >
@@ -36,9 +41,9 @@ const counts: Record<string, number> = {
           role="tab"
           aria-selected={i === 0 ? "true" : "false"}
           data-filter={f.key}
-          class="filter-btn rounded-full border border-[var(--color-border)] px-4 py-2 text-sm font-semibold text-[var(--color-text-muted)] transition-colors aria-selected:bg-[var(--color-primary)] aria-selected:text-white aria-selected:border-[var(--color-primary)] hover:border-[var(--color-primary)]"
+          class="filter-btn rounded-xl px-4 py-2 text-sm font-semibold text-[var(--color-text-muted)] transition hover:text-[var(--color-text)] aria-selected:bg-[var(--color-ink)] aria-selected:text-white aria-selected:shadow"
         >
-          {f.label} <span class="opacity-70">({counts[f.key]})</span>
+          {f.label} <span class="ml-1 font-mono text-xs opacity-60">{counts[f.key]}</span>
         </button>
       ))}
     </div>
@@ -55,6 +60,7 @@ const counts: Record<string, number> = {
   (function () {
     const buttons = document.querySelectorAll("#project-filters .filter-btn");
     const cards = document.querySelectorAll("#project-grid .project-card");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -64,9 +70,18 @@ const counts: Record<string, number> = {
         const filter = btn.getAttribute("data-filter");
         cards.forEach((card) => {
           const match = filter === "all" || card.getAttribute("data-category") === filter;
-          card.style.transition = "opacity 0.25s ease";
-          card.style.opacity = match ? "1" : "0";
-          card.style.display = match ? "" : "none";
+          card.hidden = !match;
+          if (match) {
+            card.classList.add("is-visible");
+            if (reduceMotion) return;
+            card.animate(
+              [
+                { opacity: 0, transform: "translateY(8px)" },
+                { opacity: 1, transform: "translateY(0)" },
+              ],
+              { duration: 280, easing: "ease-out" },
+            );
+          }
         });
       });
     });

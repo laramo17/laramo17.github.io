@@ -2,11 +2,11 @@ export interface Profile {
   name: string;
   title: string;
   tagline: string;
-  location: string;
+  availability: string;
+  mobility: string;
   email: string;
   linkedin: string;
   github: string;
-  cvUrl: string;
 }
 
 export interface Experience {

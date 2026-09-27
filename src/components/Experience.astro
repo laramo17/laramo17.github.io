@@ -1,61 +1,85 @@
 ---
+import SectionTitle from "./SectionTitle.astro";
 import { experiences } from "../data/experience";
 import { education } from "../data/education";
 ---
 
 <section id="parcours" class="py-20 sm:py-28">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
-    <h2 class="reveal text-3xl sm:text-4xl font-bold text-[var(--color-text)]">Parcours</h2>
+    <SectionTitle eyebrow="Parcours" title="Expériences professionnelles" />
 
-    <ol class="mt-14 relative border-l border-[var(--color-border)] pl-8 space-y-12">
-      {experiences.map((exp) => (
+    <ol class="relative mt-14 space-y-8 pl-8 sm:pl-10">
+      <span
+        class="absolute top-2 bottom-2 left-[5px] w-0.5 rounded-full bg-gradient-to-b from-[var(--color-primary)] via-[var(--color-accent)] to-[var(--color-accent-2)] sm:left-[9px]"
+        aria-hidden="true"
+      ></span>
+      {experiences.map((exp, i) => (
         <li class="reveal relative">
-          <span class="absolute -left-[calc(2rem+5px)] top-1.5 w-3 h-3 rounded-full bg-[var(--color-primary)] ring-4 ring-[var(--color-primary-soft)]" />
-          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-            <h3 class="text-lg font-bold text-[var(--color-text)]">{exp.role}</h3>
-            <span class="text-sm font-medium text-[var(--color-text-muted)] whitespace-nowrap">
-              {exp.startDate} — {exp.endDate}
-            </span>
-          </div>
-          <p class="mt-1 font-semibold text-[var(--color-primary)]">
-            {exp.company}
-            {exp.location ? ` · ${exp.location}` : ""}
-          </p>
-          <p class="mt-3 text-[var(--color-text-muted)]">{exp.description}</p>
-          <ul class="mt-3 space-y-1.5 list-disc list-inside text-sm text-[var(--color-text-muted)]">
-            {exp.achievements.map((a) => (
-              <li>{a}</li>
-            ))}
-          </ul>
-          {exp.technologies.length > 0 && (
-            <div class="mt-4 flex flex-wrap gap-2">
-              {exp.technologies.map((tech) => (
-                <span class="rounded-full bg-[var(--color-primary-soft)] px-3 py-1 text-xs font-medium text-[var(--color-primary)]">
-                  {tech}
-                </span>
-              ))}
+          <span
+            class:list={[
+              "absolute top-6 -left-8 h-3 w-3 rounded-full border-2 border-white ring-4 sm:-left-10 sm:h-5 sm:w-5",
+              i === 0
+                ? "bg-emerald-500 ring-emerald-100"
+                : "bg-[var(--color-primary)] ring-[var(--color-primary-soft)]",
+            ]}
+            aria-hidden="true"
+          ></span>
+          <div class="card-glow rounded-2xl border border-[var(--color-border)] bg-white p-6 shadow-sm transition hover:shadow-md">
+            <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <h3 class="text-lg font-bold text-[var(--color-text)]">{exp.role}</h3>
+                <p class="mt-0.5 font-semibold text-[var(--color-primary)]">
+                  {exp.company}
+                  {exp.location ? ` · ${exp.location}` : ""}
+                </p>
+              </div>
+              <span class="inline-flex shrink-0 self-start rounded-full bg-[var(--color-bg-alt)] px-3 py-1 font-mono text-xs font-medium text-[var(--color-text-muted)] ring-1 ring-[var(--color-border)]">
+                {exp.startDate} — {exp.endDate}
+              </span>
             </div>
-          )}
+            <ul class="mt-4 space-y-2 text-[15px] text-[var(--color-text-muted)]">
+              {exp.achievements.map((a) => (
+                <li class="flex gap-3">
+                  <span
+                    class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)]"
+                    aria-hidden="true"
+                  ></span>
+                  <span>{a}</span>
+                </li>
+              ))}
+            </ul>
+            {exp.technologies.length > 0 && (
+              <div class="mt-5 flex flex-wrap gap-2">
+                {exp.technologies.map((tech) => (
+                  <span class="rounded-md bg-[var(--color-primary-soft)] px-2.5 py-1 text-xs font-medium text-[var(--color-primary-hover)]">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
         </li>
       ))}
     </ol>
 
-    <div class="reveal mt-20">
-      <h3 class="text-2xl font-bold text-[var(--color-text)]">Formation & certifications</h3>
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {education.map((edu) => (
-          <div class="rounded-2xl border border-[var(--color-border)] p-6">
-            <p class="font-semibold text-[var(--color-text)]">{edu.degree}</p>
-            <p class="mt-1 text-sm text-[var(--color-primary)]">{edu.institution}</p>
-            <p class="mt-1 text-sm text-[var(--color-text-muted)]">
-              {edu.startDate} — {edu.endDate}
-            </p>
-            {edu.description && (
-              <p class="mt-2 text-sm text-[var(--color-text-muted)]">{edu.description}</p>
-            )}
-          </div>
-        ))}
+    {education.length > 0 && (
+      <div class="reveal mt-20">
+        <h3 class="text-2xl font-bold text-[var(--color-text)]">Formation & certifications</h3>
+        <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {education.map((edu) => (
+            <div class="card-glow rounded-2xl border border-[var(--color-border)] bg-white p-6 shadow-sm">
+              <p class="font-semibold text-[var(--color-text)]">{edu.degree}</p>
+              <p class="mt-1 text-sm text-[var(--color-primary)]">{edu.institution}</p>
+              <p class="mt-1 font-mono text-xs text-[var(--color-text-muted)]">
+                {edu.startDate} — {edu.endDate}
+              </p>
+              {edu.description && (
+                <p class="mt-2 text-sm text-[var(--color-text-muted)]">{edu.description}</p>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    )}
   </div>
 </section>

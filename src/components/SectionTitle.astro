@@ -1,0 +1,36 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+  dark?: boolean;
+  center?: boolean;
+}
+
+const { eyebrow, title, subtitle, dark = false, center = false } = Astro.props;
+---
+
+<div class:list={["reveal", center && "mx-auto text-center", "max-w-2xl"]}>
+  <p
+    class:list={[
+      "inline-flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.2em]",
+      dark ? "text-cyan-300" : "text-[var(--color-accent)]",
+    ]}
+  >
+    <span class:list={["h-px w-6", dark ? "bg-cyan-300" : "bg-[var(--color-accent)]"]}></span>
+    {eyebrow}
+  </p>
+  <h2
+    class:list={[
+      "mt-3 text-3xl font-bold tracking-tight sm:text-4xl",
+      dark ? "text-white" : "text-[var(--color-text)]",
+    ]}
+  >
+    {title}
+  </h2>
+  {subtitle && (
+    <p class:list={["mt-4 text-lg", dark ? "text-slate-400" : "text-[var(--color-text-muted)]"]}>
+      {subtitle}
+    </p>
+  )}
+</div>

@@ -1,31 +1,70 @@
 ---
+import Icon from "./Icon.astro";
+import SectionTitle from "./SectionTitle.astro";
 import { experiences } from "../data/experience";
 import { projects } from "../data/projects";
 
 const stats = [
-  { value: `${experiences.length}`, label: "Expériences professionnelles" },
-  { value: `${projects.length}`, label: "Projets réalisés" },
-  { value: "3", label: "Domaines : Dev, Data, IA & ML" },
+  {
+    value: `${experiences.length}`,
+    label: "Expériences professionnelles",
+    accent: "from-blue-500 to-blue-600",
+  },
+  {
+    value: `${projects.length}`,
+    label: "Projets sur GitHub",
+    accent: "from-indigo-500 to-violet-500",
+  },
+  { value: "3", label: "Domaines : Dev, Data, IA & ML", accent: "from-cyan-500 to-teal-500" },
 ];
 ---
 
-<section id="a-propos" class="py-20 sm:py-28 bg-[var(--color-bg-alt)]">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6">
-    <div class="reveal max-w-3xl">
-      <h2 class="text-3xl sm:text-4xl font-bold text-[var(--color-text)]">À propos</h2>
-      <p class="mt-6 text-lg text-[var(--color-text-muted)] leading-relaxed">
-        <!-- TODO: rédige un court paragraphe de présentation personnelle (parcours, motivations, ce que tu recherches). -->
-        Développeur full-stack orienté data et sécurité, avec une expérience couvrant le
-        développement web, le traitement de données et l'intégration de modèles d'intelligence
-        artificielle, acquise à travers plusieurs stages et projets personnels.
+<section id="a-propos" class="bg-[var(--color-bg-alt)] py-20 sm:py-28">
+  <div class="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+    <div>
+      <SectionTitle eyebrow="À propos" title="Construire, analyser, automatiser." />
+      <p class="reveal mt-6 text-lg leading-relaxed text-[var(--color-text-muted)]">
+        Des applications web en production aux pipelines de données, jusqu'aux modèles d'IA : j'ai
+        appris à livrer des solutions concrètes au fil de mes stages chez CGI, ALTEN ou au Ministère
+        de la Santé, et de mes projets personnels.
       </p>
+      <p class="reveal mt-4 text-lg leading-relaxed text-[var(--color-text-muted)]">
+        Je recherche une{" "}
+        <strong class="font-semibold text-[var(--color-text)]">
+          alternance en Développement, Data ou IA / ML
+        </strong>{" "}
+        pour 2026-2027, pour rejoindre une équipe exigeante et avoir un impact réel dès les
+        premières semaines.
+      </p>
+
+      <ul class="reveal mt-8 flex flex-wrap gap-2 text-sm font-medium">
+        <li class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-[var(--color-text)] ring-1 ring-[var(--color-border)]">
+          <span class="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true"></span>
+          Disponible en alternance · 2026-2027
+        </li>
+        <li class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-[var(--color-text)] ring-1 ring-[var(--color-border)]">
+          <Icon name="map-pin" class="h-4 w-4 text-[var(--color-accent)]" />
+          Mobilité : partout en France
+        </li>
+        <li class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-[var(--color-text)] ring-1 ring-[var(--color-border)]">
+          <Icon name="globe" class="h-4 w-4 text-[var(--color-accent-2)]" />
+          Ouvert aux opportunités en Europe
+        </li>
+      </ul>
     </div>
 
-    <div class="reveal mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-1">
       {stats.map((stat) => (
-        <div class="rounded-2xl border border-[var(--color-border)] bg-white p-6 text-center">
-          <div class="text-3xl font-extrabold text-[var(--color-primary)]">{stat.value}</div>
-          <div class="mt-2 text-sm text-[var(--color-text-muted)]">{stat.label}</div>
+        <div class="reveal relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white p-6 shadow-sm">
+          <div class={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${stat.accent}`}></div>
+          <div class="flex items-baseline gap-4 sm:flex-col sm:gap-1 lg:flex-row lg:gap-4">
+            <span
+              class={`bg-gradient-to-r ${stat.accent} bg-clip-text text-4xl font-extrabold text-transparent`}
+            >
+              {stat.value}
+            </span>
+            <span class="text-sm font-medium text-[var(--color-text-muted)]">{stat.label}</span>
+          </div>
         </div>
       ))}
     </div>

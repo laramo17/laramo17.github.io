@@ -63,14 +63,4 @@ export const experiences: Experience[] = [
     achievements: ["Développement d'une application de gestion des rendez-vous médicaux en ligne"],
     technologies: [],
   },
-  {
-    role: "Stagiaire en développement",
-    company: "BRIEF & NOUS",
-    startDate: "Novembre 2022",
-    endDate: "Mai 2023",
-    description:
-      "Constitution de base de données et traitement des commandes pour des e-commerçants.",
-    achievements: ["Constitution de Data-base et traitement des commandes pour les e-commerçants"],
-    technologies: [],
-  },
 ];

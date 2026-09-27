@@ -1,60 +1,97 @@
 ---
 import Icon from "./Icon.astro";
 import { profile } from "../data/profile";
+
+const socials = [
+  { href: profile.github, icon: "github" as const, label: "Profil GitHub", external: true },
+  { href: profile.linkedin, icon: "linkedin" as const, label: "Profil LinkedIn", external: true },
+  {
+    href: `mailto:${profile.email}`,
+    icon: "mail" as const,
+    label: "Envoyer un email",
+    external: false,
+  },
+];
 ---
 
-<section id="accueil" class="pt-32 pb-20 sm:pt-40 sm:pb-28">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6">
-    <div class="reveal max-w-3xl">
-      <p class="text-sm font-semibold text-[var(--color-primary)] mb-4">{profile.title}</p>
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--color-text)] leading-[1.1]">
-        {profile.name}
+<section id="accueil" class="relative isolate overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
+  <div class="bg-grid absolute inset-0 -z-10" aria-hidden="true"></div>
+  <div class="blob -z-10 -top-24 -left-24 h-80 w-80 bg-blue-400" aria-hidden="true"></div>
+  <div
+    class="blob -z-10 top-10 right-0 h-96 w-96 bg-indigo-400 [animation-delay:-5s]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="blob -z-10 bottom-0 left-1/3 h-72 w-72 bg-cyan-300 [animation-delay:-9s]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="mx-auto grid max-w-6xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[1.15fr_1fr]">
+    <div class="reveal">
+      <span class="inline-flex items-center gap-2.5 rounded-full border border-emerald-200 bg-emerald-50/80 px-3.5 py-1.5 text-xs font-semibold text-emerald-800 backdrop-blur">
+        <span class="pulse-dot h-2 w-2 rounded-full bg-emerald-500"></span>
+        {profile.availability}
+      </span>
+
+      <h1 class="mt-6 text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--color-text)] sm:text-6xl lg:text-7xl">
+        Salut, je suis <span class="text-gradient">{profile.name}</span>.
       </h1>
-      <p class="mt-6 text-lg sm:text-xl text-[var(--color-text-muted)] leading-relaxed">
+      <p class="mt-4 text-lg font-semibold text-[var(--color-text)] sm:text-xl">{profile.title}</p>
+      <p class="mt-4 max-w-xl text-lg leading-relaxed text-[var(--color-text-muted)]">
         {profile.tagline}
+      </p>
+      <p class="mt-5 inline-flex items-center gap-2 rounded-lg bg-white/70 px-3 py-2 text-sm font-medium text-[var(--color-text)] ring-1 ring-[var(--color-border)] backdrop-blur">
+        <Icon name="map-pin" class="h-4 w-4 text-[var(--color-accent)]" />
+        {profile.mobility}
       </p>
 
       <div class="mt-10 flex flex-wrap items-center gap-4">
         <a
           href="#projets"
-          class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--color-primary-hover)] transition-colors"
+          class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-500/30"
         >
           Voir mes projets
         </a>
         <a
           href="#contact"
-          class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-6 py-3 text-sm font-semibold text-[var(--color-text)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+          class="inline-flex items-center gap-2 rounded-xl border border-[var(--color-border)] bg-white/70 px-6 py-3 text-sm font-semibold text-[var(--color-text)] backdrop-blur transition hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
         >
           Me contacter
         </a>
       </div>
 
-      <div class="mt-10 flex items-center gap-5">
-        <a
-          href={profile.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Profil GitHub"
-          class="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
-        >
-          <Icon name="github" class="w-6 h-6" />
-        </a>
-        <a
-          href={profile.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Profil LinkedIn"
-          class="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
-        >
-          <Icon name="linkedin" class="w-6 h-6" />
-        </a>
-        <a
-          href={`mailto:${profile.email}`}
-          aria-label="Envoyer un email"
-          class="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
-        >
-          <Icon name="mail" class="w-6 h-6" />
-        </a>
+      <div class="mt-10 flex items-center gap-3">
+        {socials.map((s) => (
+          <a
+            href={s.href}
+            target={s.external ? "_blank" : undefined}
+            rel={s.external ? "noopener noreferrer" : undefined}
+            aria-label={s.label}
+            class="grid h-11 w-11 place-items-center rounded-xl border border-[var(--color-border)] bg-white/70 text-[var(--color-text-muted)] backdrop-blur transition hover:-translate-y-0.5 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
+          >
+            <Icon name={s.icon} class="h-5 w-5" />
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="reveal hidden lg:block" aria-hidden="true">
+      <div class="rotate-1 rounded-2xl border border-slate-800 bg-[var(--color-ink)] shadow-2xl shadow-indigo-500/20 transition duration-500 hover:rotate-0">
+        <div class="flex items-center gap-2 border-b border-slate-800 px-4 py-3">
+          <span class="h-3 w-3 rounded-full bg-red-400/80"></span>
+          <span class="h-3 w-3 rounded-full bg-amber-400/80"></span>
+          <span class="h-3 w-3 rounded-full bg-emerald-400/80"></span>
+          <span class="ml-3 font-mono text-xs text-slate-500">omar.ts</span>
+        </div>
+        <pre class="overflow-hidden p-6 font-mono text-[13px] leading-7 text-slate-300"><code><span class="text-indigo-400">const</span> <span class="text-cyan-300">omar</span> = {"{"}
+  role: <span class="text-emerald-300">"Full-Stack · Data & Sécurité"</span>,
+  stack: [<span class="text-emerald-300">"Python"</span>, <span class="text-emerald-300">"SQL"</span>, <span class="text-emerald-300">"Databricks"</span>,
+          <span class="text-emerald-300">"React"</span>, <span class="text-emerald-300">"Docker"</span>],
+  alternance: [<span class="text-emerald-300">"Dev"</span>, <span class="text-emerald-300">"Data"</span>, <span class="text-emerald-300">"IA / ML"</span>],
+  periode: <span class="text-emerald-300">"2026 → 2027"</span>,
+  mobilite: <span class="text-emerald-300">"France entière + Europe"</span>,
+  disponible: <span class="text-amber-300">true</span>,
+{"}"};</code></pre>
       </div>
     </div>
   </div>
