@@ -55,6 +55,8 @@ const meta = categoryMeta[project.category];
     rel="noopener noreferrer"
     class="absolute inset-0 z-0 rounded-2xl"
     aria-label={`Voir le dépôt GitHub de ${project.title}`}
+    data-umami-event="projet-github"
+    data-umami-event-projet={project.title}
   ></a>
 
   <div class="pointer-events-none relative z-10 flex items-center justify-between">
@@ -101,6 +103,8 @@ const meta = categoryMeta[project.category];
         href={project.demoUrl}
         target="_blank"
         rel="noopener noreferrer"
+        data-umami-event="projet-demo"
+        data-umami-event-projet={project.title}
         class="pointer-events-auto relative z-20 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-text)] hover:text-[var(--color-primary)]"
       >
         <Icon name="external-link" class="h-4 w-4" />

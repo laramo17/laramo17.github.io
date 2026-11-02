@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { profile } from "../data/profile";
+import { analytics } from "../data/analytics";
 
 interface Props {
   title?: string;
@@ -38,6 +39,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    {analytics.umamiWebsiteId && (
+      <script
+        is:inline
+        defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id={analytics.umamiWebsiteId}
+        data-domains={analytics.domain}
+      />
+    )}
 
     <script is:inline>
       // Applique la classe .is-visible aux éléments .reveal dès qu'ils entrent dans le viewport.

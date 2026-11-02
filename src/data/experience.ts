@@ -13,21 +13,17 @@ export const experiences: Experience[] = [
       "Pipeline CI/CD automatisé : containerisation, gestion infrastructure multi-plateforme, monitoring",
       "Système d'authentification avancé : JWT, rôles granulaires, audit complet des accès, conformité RGPD",
     ],
-    technologies: ["PostgreSQL", "Railway", "Vercel", "JWT", "Docker", "CI/CD"],
+    technologies: ["PostgreSQL", "Railway", "Vercel", "JWT", "CI/CD"],
   },
   {
-    role: "Stagiaire en Développement et Testing",
+    role: "Stage",
     company: "CGI",
     startDate: "Mars 2026",
     endDate: "Août 2026",
-    description:
-      "Migration d'une application France Messagerie de COBOL vers .NET selon une architecture DDD, en méthode Agile.",
-    achievements: [
-      "Migration d'une application France Messagerie (COBOL → .NET), architecture DDD",
-      "Documentation et réunions de suivi avec le client final",
-      "Conception et exécution de tests fonctionnels",
-    ],
-    technologies: ["COBOL", ".NET", "DDD", "Agile"],
+    description: "Stage chez CGI. Contenu confidentiel, à détailler en entretien.",
+    achievements: [],
+    technologies: [],
+    note: "Contenu confidentiel : détails à discuter en entretien",
   },
   {
     role: "Stagiaire en Machine Learning",
@@ -40,7 +36,7 @@ export const experiences: Experience[] = [
       "Extraction et structuration automatique d'informations non structurées via des modèles d'OCR",
       "Analyse et fiabilisation des résultats",
     ],
-    technologies: ["OCR", "Machine Learning", "Python"],
+    technologies: ["OCR", "Machine Learning"],
   },
   {
     role: "Stagiaire en développement",

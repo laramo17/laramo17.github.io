@@ -37,17 +37,25 @@ import { education } from "../data/education";
                 {exp.startDate} — {exp.endDate}
               </span>
             </div>
-            <ul class="mt-4 space-y-2 text-[15px] text-[var(--color-text-muted)]">
-              {exp.achievements.map((a) => (
-                <li class="flex gap-3">
-                  <span
-                    class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)]"
-                    aria-hidden="true"
-                  ></span>
-                  <span>{a}</span>
-                </li>
-              ))}
-            </ul>
+            {exp.achievements.length > 0 && (
+              <ul class="mt-4 space-y-2 text-[15px] text-[var(--color-text-muted)]">
+                {exp.achievements.map((a) => (
+                  <li class="flex gap-3">
+                    <span
+                      class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)]"
+                      aria-hidden="true"
+                    ></span>
+                    <span>{a}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {exp.note && (
+              <p class="mt-4 inline-flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-800 ring-1 ring-amber-200">
+                <span aria-hidden="true">🔒</span>
+                {exp.note}
+              </p>
+            )}
             {exp.technologies.length > 0 && (
               <div class="mt-5 flex flex-wrap gap-2">
                 {exp.technologies.map((tech) => (

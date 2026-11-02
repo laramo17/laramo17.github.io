@@ -67,6 +67,9 @@ const socials = [
             target={s.external ? "_blank" : undefined}
             rel={s.external ? "noopener noreferrer" : undefined}
             aria-label={s.label}
+            data-umami-event="contact"
+            data-umami-event-canal={s.icon}
+            data-umami-event-section="hero"
             class="grid h-11 w-11 place-items-center rounded-xl border border-[var(--color-border)] bg-white/70 text-[var(--color-text-muted)] backdrop-blur transition hover:-translate-y-0.5 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
           >
             <Icon name={s.icon} class="h-5 w-5" />

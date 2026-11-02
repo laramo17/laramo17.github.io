@@ -18,6 +18,7 @@ export interface Experience {
   description: string;
   achievements: string[];
   technologies: string[];
+  note?: string;
 }
 
 export type ProjectCategory = "dev" | "data" | "ai-ml";
@@ -44,4 +45,19 @@ export interface Education {
   startDate: string;
   endDate: string;
   description?: string;
+}
+
+export interface ChatbotConfig {
+  name: string;
+  welcome: string;
+  suggestions: string[];
+}
+
+export interface ChatbotKnowledge {
+  profile: Profile;
+  experiences: Experience[];
+  projects: Project[];
+  skills: SkillGroup[];
+  education: Education[];
+  welcome: string;
 }
